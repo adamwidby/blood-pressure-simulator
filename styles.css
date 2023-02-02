@@ -1,0 +1,27 @@
+
+* {
+    box-sizing: border-box;   
+}
+
+.main-container {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+/* blood pressure gauge image is 600x977 */
+.blood-pressure-gauge-container {
+    background-image: url("images/blood-pressure-gauge.jpg");
+    width: 600px;
+    height: 977px;
+}
+
+.hand {
+    width: 230px;
+    height: 3px;
+    background-color: black;
+    transform-origin: 100%;
+    transform: translate(65px, 292px) rotate(-90deg);
+}
+
