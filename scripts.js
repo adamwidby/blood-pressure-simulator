@@ -12,6 +12,12 @@ function iterateHand() {
 
     let angle = getCurrentAnglePosition();
 
+    if (angle > 0 && angle < 90) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+
     if (checkAngle(angle) == false) {
         angle = angle-1;
     }
@@ -39,7 +45,12 @@ document.addEventListener("keydown", (e) => {
 
 // audio
 let audio = new Audio('audio/heartbeat-01a.mp3');
-audio.play();
+
+function bloodPressureAudio() {
+    
+
+
+};
 
 
 
