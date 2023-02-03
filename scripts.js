@@ -7,14 +7,14 @@ let highPressure;
 let resultsDiv = document.querySelector(".results-container");
 
 
-setInterval(iterateHand, 50);
+setInterval(iterateHand, 150);
 setPressures();
 
 // get random pressures rounded to the nearest 5
 function setPressures() {
     resultsDiv.innerHTML = "";
-    lowPressure = Math.round(randomIntFromInterval(50,110)/5)*5;
-    highPressure = lowPressure + Math.round(randomIntFromInterval(40, 60)/5)*5;
+    lowPressure = Math.round(randomIntFromInterval(50,110)/2)*2;
+    highPressure = lowPressure + Math.round(randomIntFromInterval(40, 60)/2)*2;
     console.log(`${lowPressure} and ${highPressure}`);
 }
 
@@ -84,7 +84,7 @@ document.addEventListener("keydown", (e) => {
 
 // Convert pressure to gauge angle
 function convertPressureToAngle(pressure) {
-    return 1.125 * pressure - 85;
+    return 1.125 * pressure - 90;
 }
 
 
