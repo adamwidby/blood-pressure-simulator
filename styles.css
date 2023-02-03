@@ -3,18 +3,30 @@
     box-sizing: border-box;   
 }
 
+body {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
 .main-container {
-    display: flex;
-    height: 100vh;
+    display: grid;
+    grid-template-columns: 600px;
+    grid-template-rows: auto 600px 300px;
     align-items: flex-start;
     justify-content: center;
+}
+
+.header {
+    font-size: 2em;
+    margin: auto;
+    padding: 20px;
+    color: rgb(105, 105, 105);
 }
 
 /* blood pressure gauge image is 600x977 */
 .blood-pressure-gauge-container {
     background-image: url("images/blood-pressure-gauge.jpg");
     width: 600px;
-    height: 977px;
+    height: 600px;
 }
 
 .hand {
@@ -25,3 +37,46 @@
     transform: translate(65px, 292px) rotate(-90deg);
 }
 
+.controls-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    background-color: lightblue;
+    width: 600px;
+    border-radius: 30px;
+    padding: 30px;
+    border: 3px solid black;
+}
+
+.results-container {
+    grid-column: 1 / 4;
+    align-self: center;
+    justify-self: center;
+    font-size: 2em;
+    padding: 20px 0;
+}
+
+.reset-button {
+    grid-column: 1 / 4;
+    align-self: center;
+    justify-self: center;
+    padding: 10px 40px;
+}
+
+.sources {
+    grid-column: 1 / 4;
+}
+
+button {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.5em;
+    background-color: rgb(233, 247, 215);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(242, 250, 231);
+    border: 2px solid grey;
+}

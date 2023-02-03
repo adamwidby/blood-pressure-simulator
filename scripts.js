@@ -1,5 +1,22 @@
 
+
 let hand = document.querySelector(".hand");
+const audio = new Audio('audio/heartbeat-03.mp3');
+let lowPressure;
+let highPressure;
+let resultsDiv = document.querySelector(".results-container");
+
+
+setInterval(iterateHand, 50);
+setPressures();
+
+// get random pressures rounded to the nearest 5
+function setPressures() {
+    resultsDiv.innerHTML = "";
+    lowPressure = Math.round(randomIntFromInterval(50,110)/5)*5;
+    highPressure = lowPressure + Math.round(randomIntFromInterval(40, 60)/5)*5;
+    console.log(`${lowPressure} and ${highPressure}`);
+}
 
 function getCurrentAnglePosition() {
     const handPosition = getComputedStyle(hand);
@@ -9,10 +26,9 @@ function getCurrentAnglePosition() {
 }
 
 function iterateHand() {
-
     let angle = getCurrentAnglePosition();
 
-    if (angle > 0 && angle < 90) {
+    if (angle > convertPressureToAngle(lowPressure) && angle < convertPressureToAngle(highPressure)) {
         audio.play();
     } else {
         audio.pause();
@@ -22,8 +38,6 @@ function iterateHand() {
         angle = angle-1;
     }
     hand.style.transform = `translate(65px, 292px) rotate(${angle}deg)`;
-    console.log(angle);
-
 };
 
 function pump() {
@@ -32,8 +46,13 @@ function pump() {
     hand.style.transform = `translate(65px, 292px) rotate(${angle}deg)`;
 }
 
+function deflate() {
+    hand.style.transform = `translate(65px, 292px) rotate(${-89}deg)`;
+}
 
-setInterval(iterateHand, 50);
+function displayResults() {
+    resultsDiv.innerHTML = `Results: ${highPressure} / ${lowPressure}`;
+}
 
 // f will pump
 document.addEventListener("keydown", (e) => {
@@ -42,17 +61,31 @@ document.addEventListener("keydown", (e) => {
     }
 })
 
+// d will deflate
+document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 68) {
+        deflate();
+    }
+})
 
-// audio
-let audio = new Audio('audio/heartbeat-01a.mp3');
+// r will display results
+document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 82) {
+        displayResults();
+    }
+})
 
-function bloodPressureAudio() {
-    
+// n will reset pressures (new simulation)
+document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 78) {
+        setPressures();
+    }
+})
 
-
-};
-
-
+// Convert pressure to gauge angle
+function convertPressureToAngle(pressure) {
+    return 1.125 * pressure - 85;
+}
 
 
 // https://css-tricks.com/get-value-of-css-rotation-through-javascript/
@@ -75,5 +108,9 @@ function checkAngle(angle) {
         return true
     }
     return false
-
 }
+
+// rand int https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
