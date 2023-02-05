@@ -9,6 +9,7 @@ setPressures();
 
 // get random pressures rounded to the nearest 5
 function setPressures() {
+  deflate();
   resultsDiv.innerHTML = '';
   lowPressure = Math.round(randomIntFromInterval(50, 110) / 2) * 2;
   highPressure = lowPressure + Math.round(randomIntFromInterval(40, 60) / 2) * 2;
