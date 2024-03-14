@@ -28,8 +28,8 @@ function iterateHand() {
   let angle = getCurrentAnglePosition();
 
   if (
-    angle > convertPressureToAngle(lowPressure) &&
-    angle < convertPressureToAngle(highPressure)
+    angle > convertPressureToAngle(lowPressure + 4) &&
+    angle < convertPressureToAngle(highPressure + 4)
   ) {
     audio.play();
   } else {
