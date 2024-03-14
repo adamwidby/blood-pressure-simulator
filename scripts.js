@@ -1,5 +1,15 @@
 const hand = document.querySelector(".hand");
 const audio = new Audio("audio/korotkoffSounds.mp3");
+
+// gapless audio loop
+audio.addEventListener("timeupdate", function () {
+  var buffer = 0.9;
+  if (this.currentTime > this.duration - buffer) {
+    this.currentTime = 0;
+    this.play();
+  }
+});
+
 let lowPressure;
 let highPressure;
 const resultsDiv = document.querySelector(".results-container");
@@ -28,7 +38,7 @@ function iterateHand() {
   let angle = getCurrentAnglePosition();
 
   if (
-    angle > convertPressureToAngle(lowPressure + 4) &&
+    angle > convertPressureToAngle(lowPressure) &&
     angle < convertPressureToAngle(highPressure + 4)
   ) {
     audio.play();
